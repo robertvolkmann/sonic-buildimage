@@ -100,7 +100,8 @@ RUN apt-get update && apt-get install -y \
         debootstrap \
         augeas-tools \
         libnetfilter-conntrack-dev \
-        libnftnl-dev
+        libnftnl-dev \
+        jq
 
 RUN pip3 install --upgrade pip
 RUN apt-get purge -y python3-pip python3-yaml
