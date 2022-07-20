@@ -27,7 +27,8 @@ RUN apt-get update && apt-get install -y \
         debootstrap \
         augeas-tools \
         jq \
-        lsb-release
+        lsb-release \
+        systemd
 
 # For templating
 RUN pip3 install j2cli==0.3.10
