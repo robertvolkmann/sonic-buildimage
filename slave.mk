@@ -1109,7 +1109,7 @@ $(addprefix $(TARGET_PATH)/, $(SONIC_INSTALLERS)) : $(TARGET_PATH)/% : \
 			./build_debian.sh $(LOG)
 	)
 
-	chmod a+x $@
+	sudo chmod a+x $@
 	$(FOOTER)
 
 SONIC_TARGET_LIST += $(addprefix $(TARGET_PATH)/, $(SONIC_INSTALLERS))
