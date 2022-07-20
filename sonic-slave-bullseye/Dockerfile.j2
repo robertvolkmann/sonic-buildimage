@@ -26,7 +26,8 @@ RUN apt-get update && apt-get install -y \
         procmail \
         debootstrap \
         augeas-tools \
-        jq
+        jq \
+        lsb-release
 
 # For templating
 RUN pip3 install j2cli==0.3.10
