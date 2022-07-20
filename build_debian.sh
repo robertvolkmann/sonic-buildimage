@@ -217,7 +217,6 @@ sudo LANG=C DEBIAN_FRONTEND=noninteractive chroot $FILESYSTEM_ROOT apt-get -y in
     bsdmainutils            \
     ca-certificates         \
     i2c-tools               \
-    efibootmgr              \
     usbutils                \
     pciutils                \
     iptables-persistent     \
@@ -235,7 +234,6 @@ sudo LANG=C DEBIAN_FRONTEND=noninteractive chroot $FILESYSTEM_ROOT apt-get -y in
     mtr-tiny                \
     locales                 \
     cgroup-tools            \
-    ipmitool                \
     ndisc6                  \
     makedumpfile            \
     conntrack               \
@@ -248,7 +246,6 @@ sudo LANG=C DEBIAN_FRONTEND=noninteractive chroot $FILESYSTEM_ROOT apt-get -y in
     libgrpc++1              \
     libgrpc10               \
     haveged                 \
-    fdisk                   \
     gpg                     \
     jq
 
@@ -266,6 +263,7 @@ sudo LANG=en_US.UTF-8 DEBIAN_FRONTEND=noninteractive chroot $FILESYSTEM_ROOT upd
 sudo LANG=C chroot $FILESYSTEM_ROOT bash -c "find /usr/share/i18n/locales/ ! -name 'en_US' -type f -exec rm -f {} +"
 
 sudo LANG=C DEBIAN_FRONTEND=noninteractive chroot $FILESYSTEM_ROOT apt-get -y install \
+    kmod \
     picocom \
     systemd \
     systemd-sysv \
