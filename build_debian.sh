@@ -194,15 +194,7 @@ echo "$USERNAME:$PASSWORD" | sudo LANG=C chroot $FILESYSTEM_ROOT chpasswd
 sudo LANG=C chroot $FILESYSTEM_ROOT groupadd -f redis
 sudo LANG=C chroot $FILESYSTEM_ROOT usermod -aG redis $USERNAME
 
-if [[ $CONFIGURED_ARCH == amd64 ]]; then
-    ## Pre-install hardware drivers
-    sudo LANG=C chroot $FILESYSTEM_ROOT apt-get -y install      \
-        firmware-linux-nonfree
-fi
-
 ## Pre-install the fundamental packages
-## Note: gdisk is needed for sgdisk in install.sh
-## Note: parted is needed for partprobe in install.sh
 ## Note: ca-certificates is needed for easy_install
 ## Note: don't install python-apt by pip, older than Debian repo one
 ## Note: fdisk and gpg are needed by fwutil
@@ -235,7 +227,6 @@ sudo LANG=C DEBIAN_FRONTEND=noninteractive chroot $FILESYSTEM_ROOT apt-get -y in
     kexec-tools             \
     less                    \
     unzip                   \
-    gdisk                   \
     sysfsutils              \
     rsyslog                 \
     screen                  \
@@ -259,22 +250,7 @@ sudo LANG=C DEBIAN_FRONTEND=noninteractive chroot $FILESYSTEM_ROOT apt-get -y in
     haveged                 \
     fdisk                   \
     gpg                     \
-    jq                      \
-    auditd
-
-# Have systemd create the auditd log directory
-sudo mkdir -p ${FILESYSTEM_ROOT}/etc/systemd/system/auditd.service.d
-sudo tee ${FILESYSTEM_ROOT}/etc/systemd/system/auditd.service.d/log-directory.conf >/dev/null <<EOF
-[Service]
-LogsDirectory=audit
-LogsDirectoryMode=0750
-EOF
-
-if [[ $CONFIGURED_ARCH == amd64 ]]; then
-## Pre-install the fundamental packages for amd64 (x86)
-sudo LANG=C DEBIAN_FRONTEND=noninteractive chroot $FILESYSTEM_ROOT apt-get -y install      \
-    rasdaemon
-fi
+    jq
 
 ## Set /etc/shadow permissions to -rw-------.
 sudo LANG=c chroot $FILESYSTEM_ROOT chmod 600 /etc/shadow
